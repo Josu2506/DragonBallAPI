@@ -1,13 +1,14 @@
+// app.component.ts
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CharacterListComponent } from '../app/character-list/character-list.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [CharacterListComponent],
+  template: `
+    <h1>Dragon Ball API Demo</h1>
+    <app-character-list></app-character-list>
+  `
 })
-export class AppComponent {
-  title = 'DragonBallAPI';
-}
+export class AppComponent { }

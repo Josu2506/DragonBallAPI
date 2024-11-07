@@ -1,0 +1,13 @@
+<h1>Dragon Ball Characters</h1>
+<div *ngIf="characters$ | async as response">
+  <ul>
+    <li *ngFor="let character of response.items">
+      {{ character.name }} - {{ character.race }}
+    </li>
+  </ul>
+  <div>
+    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ response.meta.totalPages }}</span>
+    <button (click)="changePage(1)" [disabled]="currentPage === response.meta.totalPages">Next</button>
+  </div>
+</div>
