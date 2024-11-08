@@ -1,14 +1,22 @@
 // app.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CharacterListComponent } from '../app/character-list/character-list.component';
+import { ThemeService } from './service/theme.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CharacterListComponent],
-  template: `
-    <h1>Dragon Ball API Demo</h1>
-    <app-character-list></app-character-list>
-  `
+  imports: [CharacterListComponent, CommonModule],
+  templateUrl: './app.component.html',
 })
-export class AppComponent { }
+export class AppComponent implements OnInit {
+  isDarkMode = false;
+
+  constructor(public themeService: ThemeService) {}
+  get isDarkMode$() {
+    return this.themeService.darkMode$;
+  }
+
+  ngOnInit() {}
+}

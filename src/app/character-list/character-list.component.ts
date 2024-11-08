@@ -1,20 +1,16 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Observable, BehaviorSubject, switchMap, tap } from 'rxjs';
 import { DragonBallService } from '../service/dragon-ball-service.service';
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ApiResponse, Character } from '../interfaces/drangon-ball.interface';
+import { ThemeService } from '../service/theme.service';
 
-NgModule({
-  providers: [DragonBallService],
-  imports: [HttpClient],
-});
 @Component({
   selector: 'app-character-list',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './character-list.component.html',
-  styleUrl: './character-list.component.scss',
+  styleUrls: ['./character-list.component.scss'],
 })
 export class CharacterListComponent implements OnInit {
   characters$: Observable<ApiResponse<Character>>;
@@ -26,7 +22,6 @@ export class CharacterListComponent implements OnInit {
       switchMap((page) => this.dragonBallService.getCharacters(page)),
       tap((response: ApiResponse<Character>) => {
         this.currentPage = response.meta.currentPage;
-        // you can access the items property here
         console.log(response.items);
       })
     );

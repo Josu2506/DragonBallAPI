@@ -1,4 +1,3 @@
-// services/dragon-ball.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -19,14 +18,6 @@ export class DragonBallService {
       .set('limit', limit.toString());
 
     return this.http.get<ApiResponse<Character>>(`${this.apiUrl}characters`, { params })
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      );
-  }
-
-  getCharacter(id: number): Observable<Character> {
-    return this.http.get<Character>(`${this.apiUrl}characters/${id}`)
       .pipe(
         retry(3),
         catchError(this.handleError)
