@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CharacterListComponent } from '../app/character-list/character-list.component';
 import { ThemeService } from './service/theme.service';
 import { CommonModule } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  isDarkMode = false;
+  isDarkMode$: Observable<boolean>;
 
-  constructor(public themeService: ThemeService) {}
-  get isDarkMode$() {
-    return this.themeService.darkMode$;
+  constructor(public themeService: ThemeService) {
+    this.isDarkMode$ = this.themeService.darkMode$;
   }
 
   ngOnInit() {}
